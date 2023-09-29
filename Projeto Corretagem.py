@@ -35,8 +35,14 @@ for url in set(casas):
     cont += 1
     print(cont)
     driver.get(url)
-    sleep(10)
+    sleep(12)
     endereco = driver.find_element(By.XPATH, '/html/body/div[1]/main/div/section[2]/div/div/div[1]/div/div/a').text
+    endereco = endereco.split(',')
+    rua = endereco[0].strip()
+    numero = endereco[1].strip()
+    regiao = endereco[2].split('-')
+    bairro = regiao[0].strip()
+    cidade = regiao[1].strip()
     tabela_valores = driver.find_element(By.XPATH, '/html/body/div[1]/main/div/section[2]/div/div/div[2]/section/div/div/div/div[1]/table')
     valores = tabela_valores.find_elements(By.TAG_NAME, 'tr')
     print(endereco)
@@ -46,16 +52,23 @@ for url in set(casas):
         veseguro = 0
         vcondo = 0
         print('-' * 50)
-        print(valor.text)
+        #print(valor.text)
         if 'IPTU' in valor.text:
             iptu = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
             print(f'iptu', iptu)
+        elif 'Aluguel' in valor.text:
+            valuguel = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
+            print(f'Aluguel', valuguel)
         elif 'Seguro Incêndio' in valor.text:
-            vseguro = valor.text
-            print(f'vseguro', vseguro)
+            vseguro = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
+            print(f'seguro', vseguro)
         elif 'Condomínio' in valor.text:
-            vcondo = valor.text
-            print(f'vcondo', vcondo)
+            vcondo = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
+            print(f'condo', vcondo)
+        elif 'Total' in valor.text:
+            vtotal = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
+            print(f'Total', vtotal)
+        print('-' * 50)
     lista_highlights = driver.find_element(By.CLASS_NAME, 'property-highlights').find_elements(By.TAG_NAME, 'li')
     for item in lista_highlights:
         print(item.text)
