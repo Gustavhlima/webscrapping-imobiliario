@@ -48,23 +48,23 @@ for url in set(casas):
     print(endereco)
 
     for valor in valores:
-        iptu = 0
-        veseguro = 0
+        viptu = 0
+        vseguro = 0
         vcondo = 0
         print('-' * 50)
         #print(valor.text)
         if 'IPTU' in valor.text:
-            iptu = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
-            print(f'iptu', iptu)
+            viptu = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
+            print(f'IPTU', viptu)
         elif 'Aluguel' in valor.text:
             valuguel = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
             print(f'Aluguel', valuguel)
         elif 'Seguro Incêndio' in valor.text:
             vseguro = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
-            print(f'seguro', vseguro)
+            print(f'Seguro', vseguro)
         elif 'Condomínio' in valor.text:
             vcondo = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
-            print(f'condo', vcondo)
+            print(f'Condomínio', vcondo)
         elif 'Total' in valor.text:
             vtotal = valor.find_elements(By.TAG_NAME, 'td')[1].text.replace('R$ ', '').replace('.', '').replace(',', '.').strip()
             print(f'Total', vtotal)
