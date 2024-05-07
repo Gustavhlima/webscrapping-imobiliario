@@ -6,11 +6,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
-conexao = pymysql.connect(host='mysql-135933-0.cloudclusters.net',
-                          user='gustavo_lima',
-                          password='Glima@acction',
-                          database='DB_GUSTAVO_LIMA',
-                          port=10003)
+conexao = pymysql.connect(host='*********',
+                          user='*********',
+                          password='*********',
+                          database='*********',
+                          port=*********)
 cursor = conexao.cursor()
 
 chrome_options = Options()
